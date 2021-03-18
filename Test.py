@@ -2,6 +2,7 @@ import pyttsx3
 import speech_recognition as sr
 import sys
 import subprocess
+import Commands
 
 
 # This function is from Real Python: https://realpython.com/python-speech-recognition/#putting-it-all-together-a-guess-the-word-game
@@ -32,7 +33,7 @@ def recognize_speech_from_mic(recognizer, microphone) -> dict:
 
     # try recognizing the speech in the recording if a RequestError or UnknownValueError exception is caught, update the response object accordingly
     try:
-        response["transcription"] = recognizer.recognize_google(audio)
+        response["transcription"] = recognizer.recognize_sphinx(audio)
     except sr.RequestError:
         # API was unreachable or unresponsive
         response["success"] = False
@@ -45,14 +46,16 @@ def recognize_speech_from_mic(recognizer, microphone) -> dict:
 
 
 my_phrases = {'hello': ['Hi!, How are you?', None],
-              'who are you': ['I am Carden', None]}
+              'who are you': ['I am Carden', None],
+              'Weather' : [getWeather(), None]
+              }
 
 unknown_command_phrase = ["Didn't catch it, repeat please", None]
 
 engine = pyttsx3.init()
 
-engine.setProperty('rate', 195)
-#engine.say("Hello. I'm Elsi, your voice assistant. I can do anything u want")
+engine.setProperty('rate', 100)
+
 while True:
     engine.runAndWait()
     
