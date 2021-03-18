@@ -45,28 +45,12 @@ def recognize_speech_from_mic(recognizer, microphone) -> dict:
 
 
 my_phrases = {'hello': ['Hi!, How are you?', None],
-              'who are you': ['I am Elsi, voice assistant', None],
-              'what can you do': ["I can turn on film or music, open application and that's all :)", None],
-              'how can I call you?': ['You can call me Elsi', None],
-              'stop': ['Turning off', 'exit'],
-              'exit': ['Goodbye ;)', 'exit'],
-              'turn off': ['One moment please...', 'exit'],
-              'telegram': ['One moment', telegram],
-              'open telegram': ['Opening....', telegram],
-              'Elsi open telegram': ['Yes sir', telegram],
-              'viber': ['One moment', viber],
-              'open viber': ['Opening....', viber]}
+              'who are you': ['I am Carden', None]}
 
 unknown_command_phrase = ["Didn't catch it, repeat please", None]
 
 engine = pyttsx3.init()
 
-en_voice_id_m = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_DAVID_11.0"
-en_voice_id_f = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0"
-gb_voice_id_f = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-GB_HAZEL_11.0"
-
-voices = engine.getProperty('voices')
-engine.setProperty('voice', en_voice_id_f)
 engine.setProperty('rate', 195)
 #engine.say("Hello. I'm Elsi, your voice assistant. I can do anything u want")
 while True:
