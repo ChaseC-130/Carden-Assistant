@@ -39,8 +39,8 @@ keywords = {}
 engine = pyttsx3.init()
 engine.setProperty('rate', 195)
 
-phrases = {'Carden' : "I'm listening...",
-        'Weather' : getWeather()}
+phrases = {'Carden' : ["I'm listening..."],
+        'Weather' : [getWeather()]}
 
 # main loop
 while True:
