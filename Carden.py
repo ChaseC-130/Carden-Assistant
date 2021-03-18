@@ -2,7 +2,7 @@ import pyttsx3
 import speech_recognition as sr
 from Commands import *
 
-def getSpeech(recognizer, microphone):
+def getSpeech(recognizer, microphone) -> dict:
     if not isinstance(recognizer, sr.Recognizer):
         raise TypeError("`recognizer` must be `Recognizer` instance")
 
@@ -12,6 +12,8 @@ def getSpeech(recognizer, microphone):
     # adjust microphone sensitivty 50 (50-4000, lower is more sensitive)
     # microphone will cancel ambient noise
     with microphone as source:
+        recognizer.energy_sthreshold = 50
+        recognizer.adjust_for_ambient_noise(source)
         audio = recognizer.listen(source)
 
     # set up object to respond
@@ -46,12 +48,11 @@ phrases = {'Carden' : ["I'm listening..."],
 while True:
     engine.runAndWait()
     r = sr.Recognizer()
-    r.energy_sthreshold = 50
-    r.adjust_for_ambient_noise(source)
     mic = sr.Microphone(device_index=1)
 
     response = getSpeech(r, mic)
     pattern = response['transcription']
+
     if (phrases.contains(pattern)):
         engine.say(phrase.get(pattern))
     else:
