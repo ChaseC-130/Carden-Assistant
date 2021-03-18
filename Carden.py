@@ -1,4 +1,4 @@
-import pyttsx3, requests, json
+import pyttsx3
 import speech_recognition as sr
 from Commands import *
 

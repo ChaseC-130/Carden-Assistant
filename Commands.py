@@ -1,4 +1,4 @@
-import geocoder
+import geocoder, requests, json
 
 def getWeather(): 
     g = geocoder.ip('me')
