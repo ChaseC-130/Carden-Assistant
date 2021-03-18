@@ -2,7 +2,7 @@ import pyttsx3
 import speech_recognition as sr
 import sys
 import subprocess
-import Commands
+from Commands import *
 
 
 # This function is from Real Python: https://realpython.com/python-speech-recognition/#putting-it-all-together-a-guess-the-word-game
