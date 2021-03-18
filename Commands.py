@@ -1,3 +1,5 @@
+import geocoder
+
 def getWeather(): 
     g = geocoder.ip('me')
     lat = g.lat
