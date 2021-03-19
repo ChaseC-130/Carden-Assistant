@@ -68,9 +68,8 @@ def wait():
     get_response(say)
     play_file()
     print(say)
-    waiting = True
 
-while waiting:
+while True:
     print("Carden is waiting to be called")
 
     with microphone as source:
@@ -84,7 +83,6 @@ while waiting:
 
     print(response)
     if (response in my_name):
-        waiting = False
         get_response("I'm listening..")
         play_file()
         print("I heard my name")
