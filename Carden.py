@@ -53,7 +53,8 @@ microphone = sr.Microphone()
 
 unknown = ["Sorry, I didn't get that."]
 phrases = {'hello': ['Hi human', None],
-        'weather': ['weather', None]}
+        'weather': ['weather', None],
+        'chelsea': ["Chelsea is 5 foot 6 with a serious case of the grouch cheese", None]}
 
 
 
@@ -88,5 +89,6 @@ while waiting:
         get_response("I'm listening..")
         play_file()
         print("I heard my name")
+        wait()
 
-    wait()
+    
