@@ -69,18 +69,21 @@ while waiting:
 
     print(response)
     if (response in my_name):
-        
         waiting = False
         get_response("I'm listening..")
         play_file()
         print("I heard my name")
+
+
 while not waiting:
     # Listening for google speech
+    print("Listening for google")
     response = google_speech(recognizer, microphone)
     pattern = response['transcription']
     say, command = phrases.get(pattern, unknown)
     if (say == get_weather()):
         say = get_weather()
+    print("I translated: {}".format(say))
     get_response(say)
     time.sleep(3)
     #thread.start_new_thread(play_file(), ())
