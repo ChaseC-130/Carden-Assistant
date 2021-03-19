@@ -54,7 +54,7 @@ microphone = sr.Microphone()
 unknown = ["Sorry, I didn't get that."]
 phrases = {'hello': ['Hi human', None],
         'weather': ['weather', None],
-        'chelsea': ["Chelsea is 5 foot 6 with a serious case of the grouch cheese", None]}
+        'chelsea': ['chelsea is 5 foot 6 with a serious case of grouch cheese', None]}
 
 
 
@@ -75,7 +75,7 @@ while waiting:
     print("Carden is waiting to be called")
 
     with microphone as source:
-        recognizer.adjust_for_ambient_noise(source)
+        recognizer.adjust_for_ambient_noise(source, duration=0.5)
         recognizer.energy_threshold = 150
         audio = recognizer.listen(source)
     try:
