@@ -55,20 +55,19 @@ phrases = {'hello': ['Hi human', None],
         'weather': [get_weather, None]}
 
 while waiting:
-
+    sleep(1)
     print("Carden is waiting to be called")
 
     with microphone as source:
         recognizer.adjust_for_ambient_noise(source)
-        recognizer.energy_threshold(50)
+        recognizer.energy_threshold = 50
         audio = recognizer.listen(source)
-
     try:
         response = recognizer.recognize_sphinx(audio)
     except:
         response = False
 
-    if (my_name.contains(response)):
+    if (response in my_name):
         waiting = False
         get_response("I'm listening..")
         play_file()
