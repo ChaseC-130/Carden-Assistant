@@ -62,7 +62,7 @@ def wait():
     print("Listening for google")
     response = google_speech(recognizer, microphone)
     pattern = response['transcription']
-    say, command = phrases.get(pattern)
+    say = phrases.get(pattern)
     if (say == 'weather'):
         say = get_weather()
     get_response(say)
