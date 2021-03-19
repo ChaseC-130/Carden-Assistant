@@ -53,7 +53,7 @@ microphone = sr.Microphone()
 
 unknown = ["Sorry, I didn't get that."]
 phrases = {'hello': ['Hi human', None],
-        'weather': [get_weather, None]}
+        'weather': ['weather', None]}
 
 
 
@@ -63,7 +63,7 @@ def wait():
     response = google_speech(recognizer, microphone)
     pattern = response['transcription']
     say, command = phrases.get(pattern, unknown)
-    if (say == get_weather()):
+    if (say == 'weather'):
         say = get_weather()
     get_response(say)
     play_file()
