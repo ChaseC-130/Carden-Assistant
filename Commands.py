@@ -3,7 +3,6 @@ import geocoder, requests, json, boto3, vlc, time
 
 def get_response(text):
     polly_client = boto3.Session().client('polly')
-
     response = polly_client.synthesize_speech(VoiceId='Joey',
             OutputFormat='mp3',
             Text = text)
@@ -22,5 +21,3 @@ def get_weather():
 def play_file():
     media = vlc.MediaPlayer('speech.mp3')
     media.play()
-    duration = media.get_length() / 1000
-    time.sleep(duration)
