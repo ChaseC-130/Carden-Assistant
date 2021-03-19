@@ -83,8 +83,5 @@ while not waiting:
     get_response(say)
     play_file()
 
-    if command == None:
-        waiting = True
-    elif command == 'sleep':
-        waiting = True
-    
+
+    waiting = True
