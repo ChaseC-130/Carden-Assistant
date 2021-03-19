@@ -22,7 +22,7 @@ def google_speech(recognizer, microphone) -> dict:
     # adjust the recognizer sensitivity to ambient noise and record audio from the microphone
     with microphone as source:
         recognizer.adjust_for_ambient_noise(source)
-        recognizer.energy_threshold = 50
+        recognizer.energy_threshold = 150
         audio = recognizer.listen(source)
 
     # set up the response object
@@ -45,7 +45,7 @@ def google_speech(recognizer, microphone) -> dict:
 
 
 # phrases used to initiliaze Carden's listening
-my_name = ['carden', 'car then', 'car den', 'carmen', 'carlin', 'pardon']
+my_name = ['carden', 'car then', 'car den', 'carmen', 'carlin', 'pardon', 'cotton', 'are they', 'foreign']
 waiting = True
 recognizer = sr.Recognizer()
 microphone = sr.Microphone()
@@ -59,7 +59,7 @@ while waiting:
 
     with microphone as source:
         recognizer.adjust_for_ambient_noise(source)
-        recognizer.energy_threshold = 50
+        recognizer.energy_threshold = 150
         audio = recognizer.listen(source)
     try:
         response = recognizer.recognize_sphinx(audio)
