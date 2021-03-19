@@ -24,6 +24,7 @@ def recognize_speech_from_mic(recognizer, microphone) -> dict:
     # adjust the recognizer sensitivity to ambient noise and record audio from the microphone
     with microphone as source:
         recognizer.adjust_for_ambient_noise(source)
+        recognizer.energy_threshold(50)
         audio = recognizer.listen(source)
 
     # set up the response object
@@ -45,16 +46,19 @@ def recognize_speech_from_mic(recognizer, microphone) -> dict:
     return response
 
 
+conversions = {'weather' : ['weather', 'whether', 'wet her', 'where there']}
+
+
 my_phrases = {'hello': ['Hi!, How are you?', None],
               'who are you': ['I am Carden', None],
-              'Weather' : [getWeather(), None]
+              'weather' : [getWeather(), None]
               }
 
-unknown_command_phrase = ["Didn't catch it, repeat please", None]
+unknown_command_phrase = ["Sorry, I don't understand", None]
 
 engine = pyttsx3.init()
 
-engine.setProperty('rate', 100)
+engine.setProperty('rate', 125)
 
 while True:
     engine.runAndWait()
@@ -66,6 +70,10 @@ while True:
     # call function
     response = recognize_speech_from_mic(recognizer, microphone)
     pattern = response['transcription']  # get transcription from response dict
+    if not (pattern in my_phrases):
+        for x in conversions:
+            if (pattern == conversions[x]):
+                pattern = conversions.index(x)
     say, command = my_phrases.get(pattern, unknown_command_phrase)  # retrieve response from my_phrases
     engine = pyttsx3.init()
     engine.say(say)

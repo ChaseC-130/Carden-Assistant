@@ -1,61 +1,88 @@
-import pyttsx3
 import speech_recognition as sr
+import subprocess, sys, time
 from Commands import *
 
-def getSpeech(recognizer, microphone) -> dict:
+
+# This function is from Real Python: https://realpython.com/python-speech-recognition/#putting-it-all-together-a-guess-the-word-game
+def google_speech(recognizer, microphone) -> dict:
+    """Transcribe speech from recorded from `microphone`.
+
+    Returns a dictionary with three keys:
+    "success": a boolean indicating whether or not the API request was successful
+    "error":   `None` if no error occured, otherwise a string containing an error message if the API could not be reached or speech was unrecognizable
+    "transcription": `None` if speech could not be transcribed, otherwise a string containing the transcribed text
+    """
+    # check that recognizer and microphone arguments are appropriate type
     if not isinstance(recognizer, sr.Recognizer):
         raise TypeError("`recognizer` must be `Recognizer` instance")
 
     if not isinstance(microphone, sr.Microphone):
         raise TypeError("`microphone` must be `Microphone` instance")
 
-    # adjust microphone sensitivty 50 (50-4000, lower is more sensitive)
-    # microphone will cancel ambient noise
+    # adjust the recognizer sensitivity to ambient noise and record audio from the microphone
     with microphone as source:
-        recognizer.energy_sthreshold = 50
         recognizer.adjust_for_ambient_noise(source)
+        recognizer.energy_threshold(50)
         audio = recognizer.listen(source)
 
-    # set up object to respond
-    response = {
-        "success" : True,
-        "error": None,
-        "transcription": None
-    }
+    # set up the response object
+    response = {"success": True,
+                "error": None,
+                "transcription": None}
 
+    # try recognizing the speech in the recording if a RequestError or UnknownValueError exception is caught, update the response object accordingly
     try:
-        response["transcription"] = recognizer.recognize_sphinx(audio)
+        response["transcription"] = recognizer.recognize_google(audio)
     except sr.RequestError:
         # API was unreachable or unresponsive
         response["success"] = False
-        response["error"] = "I'm sorry, it appears I am having technical issues."
+        response["error"] = "Sorry, I'm having connectivity issues."
     except sr.UnknownValueError:
-        # couldn't understand
-        response["error"] = "I'm sorry, I didn't get that."
+        # speech was unintelligible
+        response["error"] = "Sorry, I'm having unknown issues."
 
     return response
 
 
+# phrases used to initiliaze Carden's listening
+my_name = ['carden', 'car then', 'car den']
+waiting = True
+recognizer = sr.Recognizer()
+microphone = sr.Microphone()
 
-keywords = {}
-engine = pyttsx3.init()
-engine.setProperty('rate', 195)
+unknown = ["Sorry, I didn't get that."]
+phrases = {'hello': ['Hi human', None],
+        'weather': [get_weather, None]}
 
-phrases = {'Carden' : ["I'm listening..."],
-        'Weather' : [getWeather()]}
+while waiting:
 
-# main loop
-while True:
-    engine.runAndWait()
-    r = sr.Recognizer()
-    mic = sr.Microphone(device_index=1)
+    print("Carden is waiting to be called")
 
-    response = getSpeech(r, mic)
+    with microphone as source:
+        recognizer.adjust_for_ambient_noise(source)
+        recognizer.energy_threshold(50)
+        audio = recognizer.listen(source)
+
+    try:
+        response = recognizer.recognize_sphinx(audio)
+    except:
+        response = False
+
+    if (my_name.contains(response)):
+        waiting = False
+        get_response("I'm listening..")
+        play_file()
+
+while not waiting:
+    # Listening for google speech
+    response = google_speech(recognizer, microphone)
     pattern = response['transcription']
+    say, command = phrases.get(pattern, unknown)
+    get_response(say)
+    play_file()
 
-    if (phrases.contains(pattern)):
-        engine.say(phrase.get(pattern))
-    else:
-        engine.say("Sorry, I didn't get that.")
-    engine = pyttsx3.init()
-    engine.say(say)
+    if command == None:
+        waiting = True
+    elif command == 'sleep':
+        waiting = True
+    
