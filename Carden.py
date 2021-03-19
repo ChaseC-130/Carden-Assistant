@@ -1,5 +1,6 @@
 import speech_recognition as sr
-import subprocess, sys, time, thread
+import subprocess, sys, time
+from threading import thread
 from Commands import *
 
 
@@ -82,5 +83,6 @@ while not waiting:
         say = get_weather()
     get_response(say)
     time.sleep(3)
-    play_file()
+    thread.start_new_thread(play_file(), ())
+    
     waiting = True
