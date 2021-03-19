@@ -45,7 +45,7 @@ def google_speech(recognizer, microphone) -> dict:
 
 
 # phrases used to initiliaze Carden's listening
-my_name = ['carden', 'car then', 'car den']
+my_name = ['carden', 'car then', 'car den', 'carmen', 'carlin', 'pardon']
 waiting = True
 recognizer = sr.Recognizer()
 microphone = sr.Microphone()
