@@ -82,6 +82,4 @@ while not waiting:
         say = get_weather()
     get_response(say)
     play_file()
-
-
     waiting = True

@@ -22,3 +22,5 @@ def get_weather():
 def play_file():
     media = vlc.MediaPlayer('speech.mp3')
     media.play()
+    duration = media.get_length() / 1000
+    time.sleep(duration)
