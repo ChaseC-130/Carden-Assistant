@@ -22,7 +22,7 @@ def google_speech(recognizer, microphone) -> dict:
     # adjust the recognizer sensitivity to ambient noise and record audio from the microphone
     with microphone as source:
         recognizer.adjust_for_ambient_noise(source)
-        recognizer.energy_threshold(50)
+        recognizer.energy_threshold = 50
         audio = recognizer.listen(source)
 
     # set up the response object
