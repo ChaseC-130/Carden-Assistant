@@ -51,10 +51,9 @@ waiting = True
 recognizer = sr.Recognizer()
 microphone = sr.Microphone()
 
-unknown = ["Sorry, I didn't get that."]
-phrases = {'hello': ['Hi human', None],
-        'weather': ['weather', None],
-        'chelsea': ['chelsea is 5 foot 6 with a serious case of grouch cheese', None]}
+phrases = {'hello': 'Hi Human',
+        'weather': 'weather',
+        'chelsea': 'chelsea is 5 foot 6 with a serious case of grouch cheese'}
 
 
 
@@ -63,7 +62,7 @@ def wait():
     print("Listening for google")
     response = google_speech(recognizer, microphone)
     pattern = response['transcription']
-    say, command = phrases.get(pattern, unknown)
+    say, command = phrases.get(pattern)
     if (say == 'weather'):
         say = get_weather()
     get_response(say)
