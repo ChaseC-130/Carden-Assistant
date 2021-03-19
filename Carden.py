@@ -78,8 +78,6 @@ while not waiting:
     response = google_speech(recognizer, microphone)
     pattern = response['transcription']
     say, command = phrases.get(pattern, unknown)
-    if (say == get_weather()):
-        say = get_weather()
     get_response(say)
     play_file()
 

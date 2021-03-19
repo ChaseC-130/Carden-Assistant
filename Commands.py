@@ -3,6 +3,9 @@ import geocoder, requests, json, boto3, vlc, time
 
 def get_response(text):
 
+    if (text == get_weather()):
+        text = get_weather()
+
     polly_client = boto3.Session().client('polly')
 
     response = polly_client.synthesize_speech(VoiceId='Joey',
