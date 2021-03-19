@@ -63,11 +63,11 @@ def wait():
     response = google_speech(recognizer, microphone)
     pattern = response['transcription']
     say = phrases.get(pattern)
+    print(say)
     if (say == 'weather'):
         say = get_weather()
     get_response(say)
     play_file()
-    print(say)
 
 while True:
     print("Carden is waiting to be called")
