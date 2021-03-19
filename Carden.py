@@ -55,7 +55,7 @@ unknown = ["Sorry, I didn't get that."]
 phrases = {'hello': ['Hi human', None],
         'weather': [get_weather, None]}
 
-while waiting:
+while True:
     print("Carden is waiting to be called")
 
     with microphone as source:
@@ -74,8 +74,10 @@ while waiting:
         play_file()
         print("I heard my name")
 
+    wait()
 
-while not waiting:
+
+def wait():
     # Listening for google speech
     print("Listening for google")
     response = google_speech(recognizer, microphone)
@@ -83,9 +85,7 @@ while not waiting:
     say, command = phrases.get(pattern, unknown)
     if (say == get_weather()):
         say = get_weather()
-    print("I translated: {}".format(say))
     get_response(say)
-    time.sleep(3)
     #thread.start_new_thread(play_file(), ())
-    t1 = threading.Thread(target = play_file())
+    print(say)
     waiting = True
