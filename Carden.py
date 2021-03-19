@@ -55,7 +55,6 @@ phrases = {'hello': ['Hi human', None],
         'weather': [get_weather, None]}
 
 while waiting:
-    sleep(1)
     print("Carden is waiting to be called")
 
     with microphone as source:
@@ -67,7 +66,9 @@ while waiting:
     except:
         response = False
 
+    print(response)
     if (response in my_name):
+        print("I heard my name")
         waiting = False
         get_response("I'm listening..")
         play_file()
