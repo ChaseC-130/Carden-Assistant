@@ -68,11 +68,11 @@ while waiting:
 
     print(response)
     if (response in my_name):
-        print("I heard my name")
+        
         waiting = False
         get_response("I'm listening..")
         play_file()
-
+        print("I heard my name")
 while not waiting:
     # Listening for google speech
     response = google_speech(recognizer, microphone)
