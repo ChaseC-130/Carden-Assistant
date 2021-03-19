@@ -66,7 +66,7 @@ def wait():
     if (say == get_weather()):
         say = get_weather()
     get_response(say)
-    #thread.start_new_thread(play_file(), ())
+    play_file()
     print(say)
     waiting = True
 
