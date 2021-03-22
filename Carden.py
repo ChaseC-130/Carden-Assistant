@@ -65,12 +65,13 @@ def wait():
         say = phrases.get(pattern)
     else:
         say = pattern
+
     if (say == 'weather'):
         say = get_weather()
 
-    if (say == 'play'):
-        #song = say[5:]
-        play_song()
+    if (pattern == 'play'):
+        song = pattern[5:]
+        play_song(song)
     else:
         get_response(say)
         play_file()
