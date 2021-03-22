@@ -63,6 +63,8 @@ def wait():
     pattern = response['transcription']
     if (pattern in phrases):
         say = phrases.get(pattern)
+    else:
+        say = phrases.get(pattern)
     if (say[0:4] == 'play'):
         song = say[5:]
         play_song(song)
