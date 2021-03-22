@@ -52,7 +52,7 @@ recognizer = sr.Recognizer()
 microphone = sr.Microphone()
 
 phrases = {'hello': 'Hi Human',
-        'weather': 'weather'}
+            'test phrase:':'ok'}
 
 
 
@@ -61,7 +61,7 @@ def wait():
     print("Listening for google")
     response = google_speech(recognizer, microphone)
     pattern = response['transcription']
-    if (phrases.has_key(pattern)):
+    if (pattern in phrases):
         say = phrases.get(pattern)
     if (say[0:4] == 'play'):
         song = say[5:]
