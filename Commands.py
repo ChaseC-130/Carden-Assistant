@@ -3,7 +3,7 @@ import geocoder, requests, json, boto3, vlc, pafy
 
 
 def play_song():
-    url = "https://www.youtube.com/watch?v=vG2PNdI8axo"
+    url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     video = pafy.new(url)
     best = video.getbestaudio()
     media = vlc.MediaPlayer(best.url)

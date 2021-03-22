@@ -46,7 +46,7 @@ def google_speech(recognizer, microphone) -> dict:
 
 
 # phrases used to initiliaze Carden's listening
-my_name = ['carden', 'car then', 'car den', 'carmen', 'carlin', 'pardon', 'cotton', 'are they', 'foreign']
+my_name = ['garden', 'carden', 'car then', 'car den', 'carmen', 'carlin', 'pardon', 'cotton', 'are they', 'foreign']
 waiting = True
 recognizer = sr.Recognizer()
 microphone = sr.Microphone()
@@ -68,7 +68,7 @@ def wait():
     if (say == 'weather'):
         say = get_weather()
 
-    if (say[0:4] == 'play'):
+    if (say == 'play'):
         #song = say[5:]
         play_song()
     else:
