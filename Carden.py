@@ -66,8 +66,8 @@ def wait():
     else:
         say = phrases.get(pattern)
     if (say[0:4] == 'play'):
-        song = say[5:]
-        play_song(song)
+        #song = say[5:]
+        play_song()
     if (say == 'weather'):
         say = get_weather()
     get_response(say)

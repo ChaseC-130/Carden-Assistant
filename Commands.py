@@ -4,7 +4,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 
 
-def play_song(song):
+def play_song():
     # uses environment variables SPOTIPY_CLIENT_ID 
     # and SPOTIPY_CLIENT_SECRET
     auth_manager = SpotifyClientCredentials()
