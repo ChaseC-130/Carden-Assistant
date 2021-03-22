@@ -6,7 +6,7 @@ from youtube_search import YoutubeSearch
 def play_song():
     result = YoutubeSearch("Rick Roll", max_results=1).to_json()
     print(result)
-    url = result[0]
+    url = 'https://www.youtube.com' + result['url_suffix']
     video = pafy.new(url)
     best = video.getbestaudio()
     media = vlc.MediaPlayer(best.url)
