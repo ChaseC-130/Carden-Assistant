@@ -1,9 +1,12 @@
 import geocoder, requests, json, boto3, vlc, pafy
+from youtube_search import YoutubeSearch
 
 
 
 def play_song():
-    url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    result = YoutubeSearch("Rick Roll", max_results=1).to_json()
+    print(result)
+    url = result[0]
     video = pafy.new(url)
     best = video.getbestaudio()
     media = vlc.MediaPlayer(best.url)
