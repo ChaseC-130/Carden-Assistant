@@ -22,7 +22,7 @@ def google_speech(recognizer, microphone) -> dict:
 
     # adjust the recognizer sensitivity to ambient noise and record audio from the microphone
     with microphone as source:
-        recognizer.adjust_for_ambient_noise(source)
+        recognizer.adjust_for_ambient_noise(source, duration = 0.5)
         recognizer.energy_threshold = 150
         audio = recognizer.listen(source)
 
@@ -62,8 +62,11 @@ def wait():
     print("Listening for google")
     response = google_speech(recognizer, microphone)
     pattern = response['transcription']
-    say = phrases.get(pattern)
-    print(say)
+    if (phrases.contains(pattern)):
+        say = phrases.get(pattern)
+    if (say[0:4] == 'play'):
+        song = say[5:]
+        play_song(song)
     if (say == 'weather'):
         say = get_weather()
     get_response(say)

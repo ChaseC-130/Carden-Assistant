@@ -1,5 +1,15 @@
-import geocoder, requests, json, boto3, vlc, time
+import geocoder, requests, json, boto3, vlc, time, spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
 
+
+
+
+def play_song(song):
+    # uses environment variables SPOTIPY_CLIENT_ID 
+    # and SPOTIPY_CLIENT_SECRET
+    auth_manager = SpotifyClientCredentials()
+    sp = spotipy.Spotify(auth_manager=auth_manager)
+    sp.start_playback(uris=['spotify:track:6rqhFgbbKwnb9MLmUQDhG6'])
 
 def get_response(text):
     polly_client = boto3.Session().client('polly')
