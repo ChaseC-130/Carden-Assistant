@@ -52,8 +52,7 @@ recognizer = sr.Recognizer()
 microphone = sr.Microphone()
 
 phrases = {'hello': 'Hi Human',
-        'weather': 'weather',
-        'chelsea': 'chelsea is 5 foot 6 with a serious case of grouch cheese'}
+        'weather': 'weather'}
 
 
 
@@ -62,7 +61,7 @@ def wait():
     print("Listening for google")
     response = google_speech(recognizer, microphone)
     pattern = response['transcription']
-    if (phrases.contains(pattern)):
+    if (phrases.has_key(pattern)):
         say = phrases.get(pattern)
     if (say[0:4] == 'play'):
         song = say[5:]
@@ -73,8 +72,9 @@ def wait():
     play_file()
 
 while True:
-    print("Carden is waiting to be called")
 
+    print("Carden is waiting to be called")
+    # offline listening uses pocketsphinx to listen for "carden"
     with microphone as source:
         recognizer.adjust_for_ambient_noise(source, duration=0.5)
         recognizer.energy_threshold = 150
