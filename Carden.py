@@ -81,19 +81,23 @@ while True:
     print("Carden is waiting to be called")
     # offline listening uses pocketsphinx to listen for "carden"
     with microphone as source:
-        recognizer.adjust_for_ambient_noise(source, duration=0.5)
+        #recognizer.adjust_for_ambient_noise(source, duration=0.5)
         recognizer.energy_threshold = 150
         audio = recognizer.listen(source)
     try:
         response = recognizer.recognize_sphinx(audio)
     except:
         response = False
+    words = response.split(" ")
+    print(words)
+    
+    for word in words:
+        if (word in my_name):
+            get_response("I'm listening..")
+            play_file()
+            print("I heard my name")
+            wait()
+    #if (response in my_name):
 
-    print(response)
-    if (response in my_name):
-        get_response("I'm listening..")
-        play_file()
-        print("I heard my name")
-        wait()
 
     
