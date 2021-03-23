@@ -1,7 +1,7 @@
 import speech_recognition as sr
 import subprocess, sys, time
 import threading
-import Commands
+from Commands import *
 
 
 
@@ -57,7 +57,7 @@ def wait():
         song = say[5:]
         play_song(song)
     else:
-        if (say in dir(Commands)):
+        if (say in dir()):
             say = eval(say)
         get_response(say)
         play_file()
