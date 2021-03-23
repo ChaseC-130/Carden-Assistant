@@ -12,20 +12,11 @@ def google_speech(recognizer, microphone) -> dict:
         recognizer.energy_threshold = 150
         audio = recognizer.listen(source)
 
-    response = {"success": True,
-                "error": None,
-                "transcription": None}
-
     # try recognizing the speech in the recording if a RequestError or UnknownValueError exception is caught, update the response object accordingly
     try:
-        response["transcription"] = recognizer.recognize_google(audio)
-    except sr.RequestError:
-        # API was unreachable or unresponsive
-        response["success"] = False
-        response["error"] = "Sorry, I'm having connectivity issues."
-    except sr.UnknownValueError:
-        # speech was unintelligible
-        response["error"] = "Sorry, I'm having unknown issues."
+        response = recognizer.recognize_google(audio)
+    except:
+        response = "I didn't get that."
 
     return response
 
@@ -44,13 +35,12 @@ def wait():
     # Listening for google speech
     print("Listening for google")
     response = google_speech(recognizer, microphone)
-    pattern = response['transcription']
+    pattern = response
     
     if (pattern in phrases):
         say = phrases.get(pattern)
     else:
         say = pattern
-
 
 
     if (say[0:4] == 'play'):
