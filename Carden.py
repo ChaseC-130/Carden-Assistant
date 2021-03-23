@@ -51,6 +51,8 @@ def wait():
             say = eval(say)
         get_response(say)
         play_file()
+        if (say == "I didn't get that."):
+            wait()
     
 
 while True:
@@ -60,10 +62,8 @@ while True:
         #recognizer.adjust_for_ambient_noise(source, duration=0.5)
         recognizer.energy_threshold = 150
         audio = recognizer.listen(source)
-    try:
         response = recognizer.recognize_sphinx(audio)
-    except:
-        response = False
+    
     words = response.split(" ")
     print(words)
     
