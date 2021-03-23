@@ -1,7 +1,8 @@
 import speech_recognition as sr
 import subprocess, sys, time
 import threading
-from Commands import *
+import Commands
+
 
 
 def google_speech(recognizer, microphone) -> dict:
