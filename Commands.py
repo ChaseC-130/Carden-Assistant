@@ -4,7 +4,7 @@ from youtube_search import YoutubeSearch
 
 
 def play_song(song):
-    result = json.loads(YoutubeSearch("Rick Roll", max_results=1).to_json())
+    result = json.loads(YoutubeSearch(song, max_results=1).to_json())
     print(result)
     url = 'https://www.youtube.com' + result['videos'][0]['url_suffix']
     video = pafy.new(url)

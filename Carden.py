@@ -61,6 +61,7 @@ def wait():
     print("Listening for google")
     response = google_speech(recognizer, microphone)
     pattern = response['transcription']
+    
     if (pattern in phrases):
         say = phrases.get(pattern)
     else:
@@ -69,8 +70,8 @@ def wait():
     if (say == 'weather'):
         say = get_weather()
 
-    if (pattern == 'play'):
-        song = pattern[5:]
+    if (say[0:4] == 'play'):
+        song = say[5:]
         play_song(song)
     else:
         get_response(say)
