@@ -27,7 +27,7 @@ recognizer = sr.Recognizer()
 microphone = sr.Microphone()
 
 phrases = {'hello': 'Hi Human',
-            'weather': 'get_weather()'}
+            'weather': get_weather()}
 
 
 
@@ -73,6 +73,7 @@ while True:
             play_file()
             print("I heard my name")
             wait()
+            time.sleep(1)
 
 
     
