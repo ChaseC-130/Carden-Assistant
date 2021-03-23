@@ -15,7 +15,7 @@ def google_speech(recognizer, microphone) -> dict:
     # try recognizing the speech in the recording if a RequestError or UnknownValueError exception is caught, update the response object accordingly
     try:
         response = recognizer.recognize_google(audio)
-    except:
+    except UnknownValueError:
         response = "I didn't get that."
 
     return response
@@ -62,7 +62,10 @@ while True:
         #recognizer.adjust_for_ambient_noise(source, duration=0.5)
         recognizer.energy_threshold = 150
         audio = recognizer.listen(source)
-        response = recognizer.recognize_sphinx(audio)
+        try:
+            response = recognizer.recognize_sphinx(audio)
+        except UnknownValueError:
+            continue
     
     words = response.split(" ")
     print(words)
